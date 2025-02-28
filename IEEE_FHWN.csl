@@ -178,7 +178,7 @@
   <macro name="page-locator">
     <text variable="locator"
           form="short"
-          prefix=", p. "
+          prefix=", s. "
           text-case="lowercase"/>
   </macro>
 
