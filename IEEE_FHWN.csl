@@ -2,10 +2,14 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
   <info>
     <title>IEEE - Milica Ristic</title>
-    <id>http://csl.mendeley.com/styles/771581361/ieee</id>
-    <link href="http://www.zotero.org/styles/ieee" rel="self"/>
+    <!-- Use a stable URL here so Mendeley sees it as a proper style -->
+    <id>http://www.zotero.org/styles/ieee-ristic</id>
+
+    <!-- "rel='self'" should match the <id> URL -->
+    <link href="http://www.zotero.org/styles/ieee-ristic" rel="self"/>
     <link href="http://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf" rel="documentation"/>
     <link href="https://journals.ieeeauthorcenter.ieee.org/your-role-in-article-production/ieee-editorial-style-manual/" rel="documentation"/>
+
     <author>
       <name>Michael Berkowitz</name>
       <email>mberkowi@gmu.edu</email>
@@ -42,15 +46,19 @@
     </contributor>
     <contributor>
       <name>Milica Ristic</name>
-      <uri></uri>
     </contributor>
+
     <category citation-format="numeric"/>
     <category field="engineering"/>
     <category field="generic-base"/>
-    <summary>IEEE style as per the 2023 guidelines, V 11.29.2023.</summary>
+    <summary>IEEE style adapted by Milica Ristic (2023 guidelines).</summary>
     <updated>2025-02-28T11:23:40+00:00</updated>
-    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">
+      This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License
+    </rights>
   </info>
+
   <locale xml:lang="en">
     <date form="text">
       <date-part name="month" form="short" suffix=" "/>
@@ -64,6 +72,9 @@
       <term name="available at">available</term>
     </terms>
   </locale>
+
+  <!-- ============================ MACROS ============================ -->
+
   <macro name="status">
     <choose>
       <if variable="page issue volume" match="none">
@@ -71,6 +82,7 @@
       </if>
     </choose>
   </macro>
+
   <macro name="edition">
     <choose>
       <if type="bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="any">
@@ -88,6 +100,7 @@
       </if>
     </choose>
   </macro>
+
   <macro name="issued">
     <choose>
       <if type="article-journal report" match="any">
@@ -115,6 +128,7 @@
       </else>
     </choose>
   </macro>
+
   <macro name="author">
     <names variable="author">
       <name and="text" et-al-min="7" et-al-use-first="1" initialize-with=". "/>
@@ -127,18 +141,21 @@
       </substitute>
     </names>
   </macro>
+
   <macro name="editor">
     <names variable="editor">
       <name initialize-with=". " delimiter=", " and="text"/>
       <label form="short" prefix=", " text-case="capitalize-first"/>
     </names>
   </macro>
+
   <macro name="director">
     <names variable="director">
       <name and="text" et-al-min="7" et-al-use-first="1" initialize-with=". "/>
       <et-al font-style="italic"/>
     </names>
   </macro>
+
   <macro name="locators">
     <group delimiter=", ">
       <text macro="edition"/>
@@ -156,12 +173,15 @@
       </group>
     </group>
   </macro>
+
+  <!-- This macro adds ", p. 123" when a page locator is set -->
   <macro name="page-locator">
     <text variable="locator"
           form="short"
           prefix=", p. "
           text-case="lowercase"/>
   </macro>
+
   <macro name="title">
     <choose>
       <if type="bill book graphic legal_case legislation motion_picture song standard software" match="any">
@@ -172,6 +192,7 @@
       </else>
     </choose>
   </macro>
+
   <macro name="publisher">
     <choose>
       <if type="bill book chapter graphic legal_case legislation motion_picture paper-conference song" match="any">
@@ -188,6 +209,7 @@
       </else>
     </choose>
   </macro>
+
   <macro name="event">
     <choose>
       <if type="paper-conference speech" match="any">
@@ -208,6 +230,7 @@
       </if>
     </choose>
   </macro>
+
   <macro name="access">
     <choose>
       <if type="webpage post post-weblog" match="any">
@@ -259,8 +282,10 @@
       </else-if>
     </choose>
   </macro>
+
   <macro name="page">
     <choose>
+      <!-- For article-journal with 'number', display "Art. no." style references -->
       <if type="article-journal" variable="number" match="all">
         <group delimiter=" ">
           <text value="Art."/>
@@ -276,6 +301,7 @@
       </else>
     </choose>
   </macro>
+
   <macro name="citation-locator">
     <group delimiter=" ">
       <choose>
@@ -289,6 +315,7 @@
       <text variable="locator"/>
     </group>
   </macro>
+
   <macro name="geographic-location">
     <group delimiter=", " suffix=".">
       <choose>
@@ -301,6 +328,7 @@
       </choose>
     </group>
   </macro>
+
   <macro name="collection">
     <choose>
       <if variable="collection-title" match="any">
@@ -313,28 +341,30 @@
       </if>
     </choose>
   </macro>
-  <citation>
-  <sort>
-    <key variable="citation-number"/>
-  </sort>
-  <layout delimiter=", ">
-    <group prefix="[" suffix="]" delimiter=", ">
-      <!-- Citation number -->
-      <text variable="citation-number"/>
 
-      <!-- If locator is a page, use the custom macro -->
-      <choose>
-        <if locator="page">
-          <text macro="page-locator"/>
-        </if>
-        <!-- Otherwise, use the default citation-locator macro for other locator types -->
-        <else>
-          <text macro="citation-locator"/>
-        </else>
-      </choose>
-    </group>
-  </layout>
-</citation>
+  <!-- ============================ CITATION (IN-TEXT) ============================ -->
+  <citation>
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout delimiter=", ">
+      <group prefix="[" suffix="]" delimiter=", ">
+        <text variable="citation-number"/>
+        <choose>
+          <!-- If the user sets a 'page' locator in Mendeley Cite -->
+          <if locator="page">
+            <text macro="page-locator"/>
+          </if>
+          <!-- Otherwise (section, line, etc.), fallback to standard locator -->
+          <else>
+            <text macro="citation-locator"/>
+          </else>
+        </choose>
+      </group>
+    </layout>
+  </citation>
+
+  <!-- ============================ BIBLIOGRAPHY (REFERENCES) ============================ -->
   <bibliography entry-spacing="0" second-field-align="flush">
     <layout>
       <text variable="citation-number" prefix="[" suffix="]"/>
